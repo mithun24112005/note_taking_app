@@ -1,5 +1,5 @@
 {
-  "name": "mern-thinkboard",
+  "name": "Mithun Notes App",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -7,7 +7,7 @@
     "start": "npm run start --prefix backend"
   },
   "keywords": [],
-  "author": "",
+  "author": "Mithun",
   "license": "ISC",
   "description": ""
 }
