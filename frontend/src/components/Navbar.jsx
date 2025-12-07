@@ -2,13 +2,14 @@ import { Link, useNavigate } from "react-router-dom";
 import { PlusIcon, LogOut } from "lucide-react";
 import ThemeSelector from "./ThemeSelector";
 
-const Navbar = () => {
+const Navbar = ({ setIsAuthenticated }) => {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
 
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
+    if (setIsAuthenticated) setIsAuthenticated(false);
     navigate("/login");
   };
 

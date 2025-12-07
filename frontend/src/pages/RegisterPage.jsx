@@ -2,8 +2,9 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import api from "../lib/axios";
 import toast from "react-hot-toast";
+import GoogleLoginButton from "../components/GoogleLoginButton";
 
-const RegisterPage = () => {
+const RegisterPage = ({ setIsAuthenticated }) => {
     const [formData, setFormData] = useState({
         name: "",
         email: "",
@@ -24,6 +25,7 @@ const RegisterPage = () => {
             localStorage.setItem("token", res.data.token);
             localStorage.setItem("user", JSON.stringify(res.data.user));
             toast.success("Account created successfully");
+            if (setIsAuthenticated) setIsAuthenticated(true);
             navigate("/");
         } catch (error) {
             console.error(error);
@@ -96,7 +98,11 @@ const RegisterPage = () => {
 
                     <div className="divider">OR</div>
 
-                    <p className="text-center text-sm">
+                    <div className="form-control">
+                        <GoogleLoginButton setIsAuthenticated={setIsAuthenticated} text="Sign up with Google" />
+                    </div>
+
+                    <p className="text-center text-sm mt-4">
                         Already have an account?{" "}
                         <Link to="/login" className="link link-primary">
                             Login here

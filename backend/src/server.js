@@ -7,6 +7,7 @@ import notesRoutes from "./routes/notesRoutes.js";
 import { connectDB } from "./config/db.js";
 import rateLimiter from "./middleware/rateLimiter.js";
 import authRoutes from "./routes/auth.js"
+import authRouter from "./routes/authRouter.js";
 
 const app = express();
 const PORT = process.env.PORT || 5001;
@@ -32,6 +33,7 @@ app.use(rateLimiter);
 
 app.use("/api/auth", authRoutes);
 app.use("/api/notes", notesRoutes);
+app.use("/auth", authRouter);
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../frontend/dist")));
