@@ -51,18 +51,18 @@ const HomePage = ({ setIsAuthenticated }) => {
 
       <div className="max-w-7xl mx-auto p-4 mt-6">
         {!isLoggedIn ? (
-          <div className="flex flex-col items-center justify-center py-20 text-center">
-            <h2 className="text-3xl font-bold mb-6 text-base-content">
+          <div className="flex flex-col items-center justify-center py-10 sm:py-20 text-center">
+            <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-base-content">
               Welcome to ThinkBoard
             </h2>
             <p className="text-xl mb-8 max-w-md text-base-content/70">
               Please login to manage your notes and ideas securely.
             </p>
-            <div className="flex gap-4">
-              <Link to="/login" className="btn btn-primary btn-lg">
+            <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto justify-center">
+              <Link to="/login" className="btn btn-primary btn-lg w-full sm:w-auto">
                 Login
               </Link>
-              <Link to="/register" className="btn btn-outline btn-lg">
+              <Link to="/register" className="btn btn-outline btn-lg w-full sm:w-auto">
                 Register
               </Link>
             </div>

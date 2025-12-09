@@ -22,7 +22,7 @@ const App = () => {
 
   return (
     <GoogleOAuthProvider clientId="281947354784-lcdtffhdb2dfssql60nctj030ksiohvr.apps.googleusercontent.com">
-      <div className="relative h-full w-full">
+      <div className="relative min-h-screen w-full">
         <div className="absolute inset-0 -z-10 h-full w-full items-center px-5 py-24 [background:radial-gradient(125%_125%_at_50%_10%,#000_60%,#00FF9D40_100%)]" />
         <Routes>
           <Route path="/" element={<HomePage setIsAuthenticated={setIsAuthenticated} />} />

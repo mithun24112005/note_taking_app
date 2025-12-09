@@ -35,16 +35,15 @@ app.use("/api/auth", authRoutes);
 app.use("/api/notes", notesRoutes);
 app.use("/auth", authRouter);
 
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "../frontend/dist")));
-
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
-  });
-}
+// Removed static serving for Vercel deployment; Vercel handles frontend separately.
 
 connectDB().then(() => {
-  app.listen(PORT, () => {
-    console.log("Server started on PORT:", PORT);
-  });
+  // Only listen if not running in a serverless environment (e.g. local dev)
+  if (process.env.NODE_ENV !== "production") {
+    app.listen(PORT, () => {
+      console.log("Server started on PORT:", PORT);
+    });
+  }
 });
+
+export default app;

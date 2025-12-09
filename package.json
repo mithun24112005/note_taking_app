@@ -2,6 +2,7 @@
   "name": "mithun-notes-app",
   "version": "1.0.0",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "build": "npm install --prefix backend && npm install --prefix frontend && npm run build --prefix frontend",
     "start": "npm run start --prefix backend"
@@ -9,5 +10,17 @@
   "keywords": [],
   "author": "Mithun",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "@upstash/ratelimit": "^2.0.5",
+    "@upstash/redis": "^1.34.9",
+    "axios": "^1.13.2",
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^4.18.2",
+    "googleapis": "^167.0.0",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^8.14.3"
+  }
 }
