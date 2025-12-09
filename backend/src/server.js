@@ -33,7 +33,7 @@ app.use(rateLimiter);
 
 app.use("/api/auth", authRoutes);
 app.use("/api/notes", notesRoutes);
-app.use("/auth", authRouter);
+app.use("/api/auth", authRouter);
 
 // Removed static serving for Vercel deployment; Vercel handles frontend separately.
 

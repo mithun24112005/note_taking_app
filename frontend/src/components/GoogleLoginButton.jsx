@@ -1,11 +1,11 @@
 import React from "react";
 import { useGoogleLogin } from "@react-oauth/google";
-import axios from "axios";
+import api from "../lib/axios";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
 const googleAuth = async (code) => {
-    return await axios.post("http://localhost:5001/auth/google", {
+    return await api.post("/auth/google", {
         code,
     });
 };
