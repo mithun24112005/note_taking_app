@@ -4,6 +4,7 @@ import { Link, useNavigate, useParams } from "react-router";
 import api from "../lib/axios";
 import toast from "react-hot-toast";
 import { ArrowLeftIcon, LoaderIcon, Trash2Icon } from "lucide-react";
+import useDraft from "../hooks/useDraft";
 
 const NoteDetailPage = () => {
   const [note, setNote] = useState(null);
@@ -11,14 +12,27 @@ const NoteDetailPage = () => {
   const [saving, setSaving] = useState(false);
 
   const navigate = useNavigate();
-
   const { id } = useParams();
+
+  // Use draft hook with a unique key for each note
+  const { title, content, setTitle, setContent, clearDraft, hasDraft } = useDraft(`note-${id}`);
 
   useEffect(() => {
     const fetchNote = async () => {
       try {
         const res = await api.get(`/notes/${id}`);
-        setNote(res.data);
+        const fetchedNote = res.data;
+        setNote(fetchedNote);
+
+        // Check if there's a draft in localStorage for this note
+        const draftKey = `note-${id}`;
+        const savedDraft = localStorage.getItem(draftKey);
+
+        // Only set the fetched values if there's NO draft
+        if (!savedDraft) {
+          setTitle(fetchedNote.title);
+          setContent(fetchedNote.content);
+        }
       } catch (error) {
         console.log("Error in fetching note", error);
         toast.error("Failed to fetch the note");
@@ -28,7 +42,7 @@ const NoteDetailPage = () => {
     };
 
     fetchNote();
-  }, [id]);
+  }, [id, setTitle, setContent]);
 
   const handleDelete = async () => {
     if (!window.confirm("Are you sure you want to delete this note?")) return;
@@ -36,6 +50,7 @@ const NoteDetailPage = () => {
     try {
       await api.delete(`/notes/${id}`);
       toast.success("Note deleted");
+      clearDraft(); // Clear the draft after successful deletion
       navigate("/");
     } catch (error) {
       console.log("Error deleting the note:", error);
@@ -44,7 +59,7 @@ const NoteDetailPage = () => {
   };
 
   const handleSave = async () => {
-    if (!note.title.trim() || !note.content.trim()) {
+    if (!title.trim() || !content.trim()) {
       toast.error("Please add a title or content");
       return;
     }
@@ -52,7 +67,9 @@ const NoteDetailPage = () => {
     setSaving(true);
 
     try {
-      await api.put(`/notes/${id}`, note);
+      await api.put(`/notes/${id}`, { title, content });
+      // Clear the draft after successful save
+      clearDraft();
       toast.success("Note updated successfully");
       navigate("/");
     } catch (error) {
@@ -90,14 +107,19 @@ const NoteDetailPage = () => {
             <div className="card-body">
               <div className="form-control mb-4">
                 <label className="label">
-                  <span className="label-text">Title</span>
+                  <span className="label-text">
+                    Title
+                    {hasDraft && (
+                      <span className="text-error ml-2 text-sm">Draft</span>
+                    )}
+                  </span>
                 </label>
                 <input
                   type="text"
                   placeholder="Note title"
                   className="input input-bordered"
-                  value={note.title}
-                  onChange={(e) => setNote({ ...note, title: e.target.value })}
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
                 />
               </div>
 
@@ -108,8 +130,8 @@ const NoteDetailPage = () => {
                 <textarea
                   placeholder="Write your note here..."
                   className="textarea textarea-bordered h-32"
-                  value={note.content}
-                  onChange={(e) => setNote({ ...note, content: e.target.value })}
+                  value={content}
+                  onChange={(e) => setContent(e.target.value)}
                 />
               </div>
 

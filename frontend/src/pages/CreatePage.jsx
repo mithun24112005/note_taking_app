@@ -3,10 +3,11 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router";
 import api from "../lib/axios";
+import useDraft from "../hooks/useDraft";
 
 const CreatePage = () => {
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
+  // Use the draft hook for auto-save functionality
+  const { title, content, setTitle, setContent, clearDraft, hasDraft } = useDraft("new-note");
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
@@ -26,6 +27,8 @@ const CreatePage = () => {
         content,
       });
 
+      // Clear the draft after successful creation
+      clearDraft();
       toast.success("Note created successfully!");
       navigate("/");
     } catch (error) {
@@ -54,7 +57,12 @@ const CreatePage = () => {
 
           <div className="card bg-base-100">
             <div className="card-body">
-              <h2 className="card-title text-2xl mb-4">Create New Note</h2>
+              <h2 className="card-title text-2xl mb-4">
+                Create New Note
+                {hasDraft && (
+                  <span className="text-sm font-normal text-error ml-2">Draft</span>
+                )}
+              </h2>
               <form onSubmit={handleSubmit}>
                 <div className="form-control mb-4">
                   <label className="label">

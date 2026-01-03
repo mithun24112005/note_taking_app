@@ -7,6 +7,12 @@ A beautiful, responsive, and secure note-taking application built with the MERN 
 ## ✨ Features
 
 - **📝 CRUD Operations**: Create, Read, Update, and Delete notes seamlessly.
+- **💾 WhatsApp-Style Draft Auto-Save**: Never lose your work! Your notes are automatically saved as you type:
+  - Auto-saves drafts to LocalStorage in real-time
+  - Works for both new notes and existing note edits
+  - Drafts are restored automatically when you return
+  - Smart cleanup - drafts clear after successful save
+  - Visual indicator shows when draft is active
 - **🔐 Secure Authentication**:
   - **Google OAuth**: Fast and secure login with your Google account.
   - **Local Auth**: Traditional email and password registration/login.
