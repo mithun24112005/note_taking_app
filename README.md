@@ -729,24 +729,6 @@ Update the following in code:
 
 ---
 
-## 🤝 Contributing
-
-Contributions are what make the open source community amazing! Any contributions you make are **greatly appreciated**.
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
----
-
-## 📝 License
-
-Distributed under the MIT License. See `LICENSE` for more information.
-
----
-
 ## 👨‍💻 Author
 
 **Mithun**
@@ -755,24 +737,3 @@ Distributed under the MIT License. See `LICENSE` for more information.
 - Project Link: [https://github.com/mithun24112005/note_taking_app](https://github.com/mithun24112005/note_taking_app)
 
 ---
-
-## 🙏 Acknowledgments
-
-- [React Documentation](https://react.dev/)
-- [Express.js](https://expressjs.com/)
-- [MongoDB](https://www.mongodb.com/)
-- [TailwindCSS](https://tailwindcss.com/)
-- [DaisyUI](https://daisyui.com/)
-- [Vite](https://vitejs.dev/)
-- [Google OAuth](https://developers.google.com/identity/protocols/oauth2)
-
----
-
-<div align="center">
-
-**⭐ Star this repo if you find it helpful!**
-
-Made with ❤️ by Mithun
-
-</div>
-
